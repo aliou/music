@@ -1,0 +1,40 @@
+body {
+  font-family: Lato, Verdana, Arial, sans-serif;
+  border-top-color: rgb(255, 67, 41);
+  border-top-style: solid;
+  border-top-width: 3px;
+}
+
+a {
+  color: rgb(255, 67, 41);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin-bottom: 14px;
+  font-size: 2em;
+}
+
+#nav,
+#footer {
+  float: right;
+  margin-top: 14px;
+}
+
+#nav a {
+  margin-left: 8px;
+}
+
+#content {
+  width: 480px;
+  margin: 60px auto;
+}
+
+.header {
+  font-size: 0.8em;
+  margin-bottom: 9px;
+}
