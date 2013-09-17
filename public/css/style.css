@@ -19,22 +19,12 @@ h1 {
   font-size: 2em;
 }
 
-#nav,
 #footer {
   float: right;
   margin-top: 14px;
 }
 
-#nav a {
-  margin-left: 8px;
-}
-
 #content {
   width: 630px;
   margin: 100px auto;
-}
-
-.header {
-  font-size: 0.8em;
-  margin-bottom: 9px;
 }
