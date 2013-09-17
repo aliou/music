@@ -2,10 +2,10 @@ require 'date'
 require 'lastfm'
 
 class FetchMusic
-  def initialize(date = Date.today)
+  def initialize(date = Date.today - 1)
     @client = Lastfm.new ENV['LASTFM_KEY'], ENV['LASTFM_SECRET']
     @end_date = date
-    @begin_date = @end_date - 7
+    @begin_date = @end_date - 6
   end
 
   def fetch
@@ -28,13 +28,16 @@ class FetchMusic
 
   def save
     $redis["songs"] = JSON.dump({
-      labels: (@begin_date..@end_date).map { |d| d.strftime('%d-%m').to_i },
-      datasets:
-      {
-        fillColor: "rgba(220,220,220,0.5)",
-        strokeColor: "rgba(220,220,220,1)",
-        data: @values
-      }
+      labels: (@begin_date..@end_date).map { |d| d.strftime('%d-%m') },
+      datasets: [
+        {
+          fillColor: 'rgba(255,67,41,0.3)',
+          strokeColor: 'rgba(255,67,41,1)',
+          pointColor: 'rgba(255,67,41,1)',
+          pointStrokeColor: "#fff",
+          data: @values
+        }
+      ]
     })
   end
 end
