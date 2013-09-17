@@ -1,7 +1,7 @@
 <canvas id="myChart" width="630" height="300"></canvas>
 <div id="footer">
   <p>
-    <% if @last_song["nowplaying"].nil? %>
+    <% if @last_song.has_key?("date") %>
       Last played:
     <% else %>
       Now playing:

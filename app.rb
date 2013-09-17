@@ -14,7 +14,8 @@ class Music < Sinatra::Application
   get '/' do
     @music = $redis['songs']
     @last_song = $lastfm_client.user.get_recent_tracks(:user => 'aliouftw',
-                                                         :limit => 1).first
+                                                       :limit => 1)
+    @last_song = @last_song.first unless @last_song.class != Array
     erb :index
   end
 end
