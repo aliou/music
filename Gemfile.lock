@@ -38,7 +38,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  lastfm
+  lastfm (~> 1.20.1)
   rake (~> 10.1.0)
   redis (~> 3.0.4)
   sinatra (~> 1.4.3)
