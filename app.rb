@@ -13,6 +13,8 @@ $lastfm_client = Lastfm.new ENV['LASTFM_KEY'], ENV['LASTFM_SECRET']
 class Music < Sinatra::Application
   get '/' do
     @music = $redis['songs']
+    @last_song = $lastfm_client.user.get_recent_tracks(:user => 'aliouftw',
+                                                         :limit => 1).first
     erb :index
   end
 end

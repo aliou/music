@@ -1,4 +1,15 @@
 <canvas id="myChart" width="630" height="300"></canvas>
+<div id="footer">
+  <p>
+    <% if @last_song["nowplaying"].nil? %>
+      Last played:
+    <% else %>
+      Now playing:
+    <% end %>
+    <a href="<%= @last_song["url"] %>"><%= @last_song["name"] %></a>
+    by <%= @last_song["artist"]["content"] %>
+  </p>
+</div>
 <script>
   var music = { 'music': <%= @music %> };
 </script>
