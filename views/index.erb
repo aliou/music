@@ -1,4 +1,14 @@
-<canvas id="myChart" width="630" height="300"></canvas>
+<div class="ui pointing secondary demo menu">
+  <a class="active red item" data-tab="first">Song Count</a>
+  <a class="red item" data-tab="second">Second</a>
+  <a class="red item" data-tab="third">Third</a>
+  <div class="right item">coucou</a></div>
+</div>
+
+<canvas class="ui active tab" data-tab="first" id="linechart" width="630" height="300"></canvas>
+<canvas class="ui tab" data-tab="second" id="barchart" width="630" height="300"></canvas>
+<canvas class="ui tab" data-tab="third" id="donutchart" width="630" height="300"></canvas>
+
 <div id="footer">
   <p>
     <% if @last_song.has_key?("date") %>
@@ -8,8 +18,9 @@
     <% end %>
     <a href="<%= @last_song["url"] %>"><%= @last_song["name"] %></a>
     by <%= @last_song["artist"]["content"] %>
-  </p>
+</p>
 </div>
+
 <script>
   var music = { 'music': <%= @music %> };
 </script>

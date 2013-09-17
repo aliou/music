@@ -1,4 +1,4 @@
-var ctx = document.getElementById("myChart").getContext("2d");
+var ctx = document.getElementById("linechart").getContext("2d");
 var myNewChart = new Chart(ctx).Line(music.music, {
   bezierCurve: false,
   scaleOverride : true,
@@ -6,3 +6,5 @@ var myNewChart = new Chart(ctx).Line(music.music, {
   scaleStepWidth : 10,
   scaleStartValue : 0,
 });
+
+$('.demo.menu .item').tab();
