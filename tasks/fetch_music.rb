@@ -3,7 +3,6 @@ require 'lastfm'
 
 class FetchMusic
   def initialize(date = Date.today - 1)
-    @client = Lastfm.new ENV['LASTFM_KEY'], ENV['LASTFM_SECRET']
     @end_date = date
     @begin_date = @end_date - 6
   end
@@ -17,7 +16,7 @@ class FetchMusic
     (@begin_date..@end_date).each do |date|
       opts = default_options.merge(:from => date.strftime('%s').to_i,
                                    :to   => date.next.strftime('%s').to_i)
-      songs = @client.user.get_recent_tracks(opts)
+      songs = $lastfm_client.user.get_recent_tracks(opts)
       if songs.nil?
         @values << 0
       else
