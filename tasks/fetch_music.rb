@@ -8,17 +8,29 @@ class FetchMusic
   end
 
   def fetch
+    @data = []
     default_options = {
       :user => 'aliouftw',
       :limit => 200
     }
-    @values = []
     (@begin_date..@end_date).each do |date|
       opts = default_options.merge(:from => date.strftime('%s').to_i,
                                    :to   => date.next.strftime('%s').to_i)
-      songs = $lastfm_client.user.get_recent_tracks(opts)
-      if songs.nil?
-        @values << 0
+      @data += $lastfm_client.user.get_recent_tracks(opts)
+    end
+    @data.delete_if {|t| t.include? "nowplaying"}
+    fetch_songs
+    fetch_artist
+  end
+
+  def fetch_songs
+    @song_count = []
+    (@begin_date..@end_date).each do |date|
+      songs = @data.select {|t| Date.strptime(t["date"]["uts"], '%s') == date}
+      @song_count << songs.length
+    end
+  end
+
       else
         @values << songs.length
       end
@@ -26,7 +38,7 @@ class FetchMusic
   end
 
   def save
-    $redis["songs"] = JSON.dump({
+    $redis["song_count"] = JSON.dump({
       labels: (@begin_date..@end_date).map { |d| d.strftime('%d-%m') },
       datasets: [
         {
@@ -34,7 +46,7 @@ class FetchMusic
           strokeColor: 'rgba(255,67,41,1)',
           pointColor: 'rgba(255,67,41,1)',
           pointStrokeColor: "#fff",
-          data: @values
+          data: @song_count
         }
       ]
     })

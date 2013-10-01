@@ -1,5 +1,5 @@
-var ctx = document.getElementById("linechart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(music.music, {
+var ctx_linechart = document.getElementById("linechart").getContext("2d");
+var linechart = new Chart(ctx_linechart).Line(song_count.music, {
   bezierCurve: false,
   scaleOverride : true,
   scaleSteps : 15,
