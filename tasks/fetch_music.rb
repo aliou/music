@@ -31,10 +31,21 @@ class FetchMusic
     end
   end
 
+  def fetch_artist
+    count = {}
+    @data.each do |track|
+      artist = track["artist"]["content"]
+      if count.include? artist
+        count[artist] += 1
       else
-        @values << songs.length
+        count[artist] = 1
       end
     end
+    count = count.sort {|a, b| a[1] <=> b[1]}.reverse
+    @artist_count = count.shift(4)
+    total = 0
+    count.each {|t| total += t[1]}
+    @artist_count += [["Other", total]]
   end
 
   def save
@@ -50,5 +61,16 @@ class FetchMusic
         }
       ]
     })
+
+    colors = ["#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "4D5360"]
+    $redis["artist_count"] = JSON.dump(
+      @artist_count.each_with_index.map do |x, i|
+        {
+          caption: x[0],
+          value: x[1],
+          color: colors[i]
+        }
+      end
+    )
   end
 end
