@@ -17,6 +17,7 @@ class Music < Sinatra::Application
     @last_song = $lastfm_client.user.get_recent_tracks(:user => 'aliouftw',
                                                        :limit => 1)
     @last_song = @last_song.first unless @last_song.class != Array
+    @np_str = @last_song.has_key?("date") ? "Last played" : "Now Playing"
     erb :index
   end
 end

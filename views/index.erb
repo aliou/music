@@ -11,14 +11,9 @@
 </div>
 <canvas class="ui tab" data-tab="third" id="donutchart" width="630" height="300"></canvas>
 
-<!-- TODO: Improve this. -->
 <div id="footer">
   <p>
-    <% if @last_song.has_key?("date") %>
-      Last played:
-    <% else %>
-      Now playing:
-    <% end %>
+    <%= @np_str %>:
     <a href="<%= @last_song["url"] %>"><%= @last_song["name"] %></a>
     by <%= @last_song["artist"]["content"] %>
 </p>
